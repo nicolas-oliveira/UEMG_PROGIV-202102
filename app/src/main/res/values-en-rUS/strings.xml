@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">BemVindo</string>
+    <string name="welcome">Welcome to my android application</string>
+    <string name="texto2">Welcome message from my application</string>
+    <string name="image_description">Image from our story</string>
+</resources>
