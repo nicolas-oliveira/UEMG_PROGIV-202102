@@ -16,7 +16,7 @@ public class MainActivity extends AppCompatActivity {
     String operacao;
 
     Button btn00, btn01, btn02, btn03, btn04, btn05, btn06, btn07, btn08, btn09;
-    Button btnSoma, btnSub, btnMult, btnMulti, btnDiv, btnIgual, btnLimpa;
+    Button btnSoma, btnSub, btnMult, btnDiv, btnIgual, btnLimpa;
 
     TextView RESULTSCREEN;
 
@@ -27,6 +27,7 @@ public class MainActivity extends AppCompatActivity {
         Result = new int[2];
 
         RESULTSCREEN = (TextView) findViewById(R.id.RESULTSCREEN);
+
         btn00 = (Button) findViewById(R.id.button0);
         btn01 = (Button) findViewById(R.id.button1);
         btn02 = (Button) findViewById(R.id.button2);
@@ -45,6 +46,7 @@ public class MainActivity extends AppCompatActivity {
         btnLimpa = (Button) findViewById(R.id.buttonLimpar);
         btnIgual = (Button) findViewById(R.id.buttonigual);
 
+
         this.selectButton(btn00, 0);
         this.selectButton(btn01, 1);
         this.selectButton(btn02, 2);
@@ -56,21 +58,10 @@ public class MainActivity extends AppCompatActivity {
         this.selectButton(btn08, 8);
         this.selectButton(btn09, 9);
 
-        btnSoma.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                operacao = "soma";
-                proximoNumero();
-            }
-        });
-
-        btnSub.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                operacao = "sub";
-                proximoNumero();
-            }
-        });
+        this.setOperation(btnSoma, "soma");
+        this.setOperation(btnSub, "sub");
+        this.setOperation(btnMult, "multi");
+        this.setOperation(btnDiv, "div");
 
         btnIgual.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -108,14 +99,24 @@ public class MainActivity extends AppCompatActivity {
         i = 1;
     }
 
+    private void setOperation(Button opButton, String op) {
+        opButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                operacao = op;
+                proximoNumero();
+            }
+        });
+    }
+
     private void selectButton(Button buttonChoose, int propNumber) {
         buttonChoose.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (count < 7) {
+                // if (count < 7) {
                     Result[i] = (Result[1] * 10) + propNumber;
                     count++;
-                }
+                // }
                 exibirResultado();
                 Total = 0;
             }
@@ -132,13 +133,19 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void calcular() {
-        double value;
+        // double value;
         switch (operacao) {
             case "soma":
                 Total = (Result[0] + Result[1]);
                 break;
             case "sub":
                 Total = (Result[0] - Result[1]);
+                break;
+            case "multi":
+                Total = (Result[0] * Result[1]);
+                break;
+            case "div":
+                Total = (Result[0] / Result[1]);
                 break;
         }
         if (Total < INVALID) {
